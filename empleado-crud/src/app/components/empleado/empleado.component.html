@@ -1,0 +1,83 @@
+<div class="max-w-5xl mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-6 text-center">Gestión de Empleados </h1>
+  <h2 class="text-2xl font-bold mb-6 text-center">CRUD prueba tecnica </h2>
+
+  <!-- Formularioo -->
+  <form (ngSubmit)="guardarEmpleado()" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-6 rounded shadow-md mb-6">
+
+    <label class="p2"> Nombre
+    <input type="text" placeholder="Nombre *" [(ngModel)]="empleado.nombre" name="nombre"
+      class="border p-2 rounded w-full" required />
+    </label>
+
+    <label class="p2"> Correo
+    <input type="email" placeholder="Correo *" [(ngModel)]="empleado.correo" name="correo"
+      class="border p-2 rounded w-full" required />
+    </label>
+
+    <label class="p2"> Cargo
+    <input type="text" placeholder="Cargo" [(ngModel)]="empleado.cargo" name="cargo"
+      class="border p-2 rounded w-full" />
+    </label>
+
+    <label class="p2"> Departamento
+    <input type="text" placeholder="Departamento" [(ngModel)]="empleado.departamento" name="departamento"
+      class="border p-2 rounded w-full" />
+    </label>
+
+    <label class="p2"> Teléfono
+    <input type="tel" placeholder="Teléfono" [(ngModel)]="empleado.telefono" name="telefono"
+      class="border p-2 rounded w-full" />
+    </label>
+
+    <label class="p2"> Fecha de Ingreso
+    <input type="date" [(ngModel)]="empleado.fecha" name="fecha"
+      class="border p-2 rounded w-full" />
+    </label>
+
+    <div class="flex items-center space-x-2">
+      <input type="checkbox" [(ngModel)]="empleado.activo" name="activo" id="activo" />
+      <label for="activo">Activo</label>
+    </div>
+
+    <button type="submit"
+      class="col-span-1 md:col-span-2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded font-semibold">
+      {{ editando ? 'Actualizar' : 'Guardar' }} Empleado
+    </button>
+  </form>
+
+  <!-- Tabla para mostrar Empleados -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white border border-gray-200 shadow-md rounded">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="text-left p-2 border-b">Nombre</th>
+          <th class="text-left p-2 border-b">Correo</th>
+          <th class="text-left p-2 border-b">Cargo</th>
+          <th class="text-left p-2 border-b">Departamento</th>
+          <th class="text-left p-2 border-b">Teléfono</th>
+          <th class="text-left p-2 border-b">Fecha</th>
+          <th class="text-left p-2 border-b">Activo</th>
+          <th class="text-center p-2 border-b">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of empleados" class="hover:bg-gray-50">
+          <td class="p-2 border-b">{{ emp.nombre }}</td>
+          <td class="p-2 border-b">{{ emp.correo }}</td>
+          <td class="p-2 border-b">{{ emp.cargo }}</td>
+          <td class="p-2 border-b">{{ emp.departamento }}</td>
+          <td class="p-2 border-b">{{ emp.telefono }}</td>
+          <td class="p-2 border-b">{{ emp.fecha | date }}</td>
+          <td class="p-2 border-b">{{ emp.activo ? 'Sí' : 'No' }}</td>
+          <td class="p-2 border-b flex gap-2 justify-center">
+            <button (click)="editarEmpleado(emp)"
+              class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded">Editar</button>
+            <button (click)="eliminarEmpleado(emp.id)"
+              class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
